@@ -1,5 +1,5 @@
 #-----------
-#autoattack
+#responsibility
 #Aiden Krahn
 #Started March 29
 #------------
@@ -13,7 +13,7 @@ mns = {'taxes':111, 'homework':100 + x, 'studying':20, 'extracurricular':50,
 
 
 #constants
-time = 720
+time = 400
 responsibility = 50
 
 
@@ -21,7 +21,8 @@ responsibility = 50
 def dothething():
     global responsibility
     global time
-    while time > 0 or responsibility > 0:
+    play = True
+    while play == True:
         ssot = list(mns.keys())
         whatone = ssot[random.randint(0, len(ssot)-1)]
         print(f"You remember needing to do {whatone}.")
@@ -32,14 +33,23 @@ def dothething():
             mns.pop(whatone)
             print(f"You didn't spend time on {whatone}.")
             print(f"You have {time} time left, and {responsibility} responsibility left.")
-            return responsibility
+            if time <= 0:
+                break
+            
+            else:
+                play = True
             
         elif doit == 'y':
             time -= mns[whatone]
             mns.pop(whatone)
             print(f"You spent time on your {whatone}.")
             print(f"You have {time} time left, and {responsibility} responsibility left.")
-            return time
+            if time <= 0:
+                break
+            
+            else:
+                play = True
+            
         
     if time <= 0:
         print("You ran out of time.")
@@ -62,3 +72,4 @@ def dothething():
 print("You are a human being with *gasp* responsibilities.")
 print("Your memory is bad, but you can swear there's task you need to focus on:")
 dothething()
+
